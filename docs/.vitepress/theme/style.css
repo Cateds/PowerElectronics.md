@@ -1,107 +1,191 @@
 /**
- * Customize default theme styling by overriding CSS variables:
+ * Custom theme matching cateds.github.io style
+ * Muted steel-blue/teal palette, Inter + Noto Serif SC typography,
+ * glassmorphism, soft shadows, generous radii.
+ *
+ * VitePress CSS variable reference:
  * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
  */
 
-/**
- * Colors
- *
- * Each colors have exact same color scale system with 3 levels of solid
- * colors with different brightness, and 1 soft color.
- *
- * - `XXX-1`: The most solid color used mainly for colored text. It must
- *   satisfy the contrast ratio against when used on top of `XXX-soft`.
- *
- * - `XXX-2`: The color used mainly for hover state of the button.
- *
- * - `XXX-3`: The color for solid background, such as bg color of the button.
- *   It must satisfy the contrast ratio with pure white (#ffffff) text on
- *   top of it.
- *
- * - `XXX-soft`: The color used for subtle background such as custom container
- *   or badges. It must satisfy the contrast ratio when putting `XXX-1` colors
- *   on top of it.
- *
- *   The soft color must be semi transparent alpha channel. This is crucial
- *   because it allows adding multiple "soft" colors on top of each other
- *   to create a accent, such as when having inline code block inside
- *   custom containers.
- *
- * - `default`: The color used purely for subtle indication without any
- *   special meanings attached to it such as bg color for menu hover state.
- *
- * - `brand`: Used for primary brand colors, such as link text, button with
- *   brand theme, etc.
- *
- * - `tip`: Used to indicate useful information. The default theme uses the
- *   brand color for this by default.
- *
- * - `warning`: Used to indicate warning to the users. Used in custom
- *   container, badges, etc.
- *
- * - `danger`: Used to show error, or dangerous message to the users. Used
- *   in custom container, badges, etc.
- * -------------------------------------------------------------------------- */
+/* ========================================================================
+ * Brand Colors — teal (#6a999b) mapped to VitePress 4-level system
+ * ====================================================================== */
 
 :root {
+  /* brand scale */
+  --vp-c-brand-1: #4a7a7c;
+  --vp-c-brand-2: #5a8a8c;
+  --vp-c-brand-3: #6a999b;
+  --vp-c-brand-soft: rgba(106, 153, 155, 0.14);
+
+  /* defaults stay gray */
   --vp-c-default-1: var(--vp-c-gray-1);
   --vp-c-default-2: var(--vp-c-gray-2);
   --vp-c-default-3: var(--vp-c-gray-3);
   --vp-c-default-soft: var(--vp-c-gray-soft);
 
-  --vp-c-brand-1: var(--vp-c-indigo-1);
-  --vp-c-brand-2: var(--vp-c-indigo-2);
-  --vp-c-brand-3: var(--vp-c-indigo-3);
-  --vp-c-brand-soft: var(--vp-c-indigo-soft);
-
+  /* tip = brand */
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
   --vp-c-tip-3: var(--vp-c-brand-3);
   --vp-c-tip-soft: var(--vp-c-brand-soft);
 
+  /* warning */
   --vp-c-warning-1: var(--vp-c-yellow-1);
   --vp-c-warning-2: var(--vp-c-yellow-2);
   --vp-c-warning-3: var(--vp-c-yellow-3);
   --vp-c-warning-soft: var(--vp-c-yellow-soft);
 
+  /* danger */
   --vp-c-danger-1: var(--vp-c-red-1);
   --vp-c-danger-2: var(--vp-c-red-2);
   --vp-c-danger-3: var(--vp-c-red-3);
   --vp-c-danger-soft: var(--vp-c-red-soft);
 }
 
-/**
+.dark {
+  --vp-c-brand-1: #8abcbe;
+  --vp-c-brand-2: #7aacae;
+  --vp-c-brand-3: #6a999b;
+  --vp-c-brand-soft: rgba(106, 153, 155, 0.16);
+  
+  --vp-home-hero-name-background: linear-gradient(
+    120deg,
+    #6a999b 0%,
+    #8abcbe 25%,
+    #a0d0d2 50%,
+    #8abcbe 75%,
+    #6a999b 100%
+  );
+}
+
+/* ========================================================================
+ * Backgrounds, Text & Borders — matching ref project cool-gray palette
+ * ====================================================================== */
+
+:root {
+  --vp-c-bg: #f8fafb;
+  --vp-c-bg-alt: #f0f4f6;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-bg-soft: #f0f4f6;
+
+  --vp-c-text-1: #2a3840;
+  --vp-c-text-2: #5a6a72;
+  --vp-c-text-3: #8a969e;
+
+  --vp-c-border: #d4dce2;
+  --vp-c-divider: #e2e8ec;
+  --vp-c-gutter: #f0f4f6;
+}
+
+.dark {
+  --vp-c-bg: #1c2024;
+  --vp-c-bg-alt: #24282e;
+  --vp-c-bg-elv: #2a3038;
+  --vp-c-bg-soft: #24282e;
+
+  --vp-c-text-1: #d8dcde;
+  --vp-c-text-2: #8a9298;
+  --vp-c-text-3: #6a7278;
+
+  --vp-c-border: #3a3e44;
+  --vp-c-divider: #2e3238;
+  --vp-c-gutter: #24282e;
+}
+
+/* ========================================================================
+ * Typography — Inter (body) + Noto Serif SC (headings)
+ * ====================================================================== */
+
+:root {
+  --vp-font-family-base: "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  --vp-font-family-mono: "JetBrains Mono", "Fira Code", "Menlo", "Monaco",
+    "Consolas", "Liberation Mono", "Courier New", monospace;
+
+  /* custom serif variable for headings */
+  --font-serif: "Noto Serif SC", "Source Han Serif SC", Georgia,
+    "Times New Roman", serif;
+}
+
+/* apply serif to headings & titles */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.VPHero .name,
+.VPHero .text,
+.VPFeature .title {
+  font-family: var(--font-serif);
+}
+
+/* slightly tighter line-height on large headings */
+.vp-doc h1 {
+  letter-spacing: -0.01em;
+}
+
+.vp-doc h2 {
+  border-top-color: var(--vp-c-divider);
+}
+
+/* ========================================================================
  * Component: Button
- * -------------------------------------------------------------------------- */
+ * ====================================================================== */
 
 :root {
   --vp-button-brand-border: transparent;
-  --vp-button-brand-text: var(--vp-c-white);
+  --vp-button-brand-text: #ffffff;
   --vp-button-brand-bg: var(--vp-c-brand-3);
   --vp-button-brand-hover-border: transparent;
-  --vp-button-brand-hover-text: var(--vp-c-white);
+  --vp-button-brand-hover-text: #ffffff;
   --vp-button-brand-hover-bg: var(--vp-c-brand-2);
   --vp-button-brand-active-border: transparent;
-  --vp-button-brand-active-text: var(--vp-c-white);
+  --vp-button-brand-active-text: #ffffff;
   --vp-button-brand-active-bg: var(--vp-c-brand-1);
+
+  --vp-button-alt-border: var(--vp-c-border);
+  --vp-button-alt-text: var(--vp-c-text-1);
+  --vp-button-alt-bg: var(--vp-c-bg-soft);
+  --vp-button-alt-hover-border: var(--vp-c-border);
+  --vp-button-alt-hover-text: var(--vp-c-text-1);
+  --vp-button-alt-hover-bg: var(--vp-c-bg-alt);
 }
 
-/**
- * Component: Home
- * -------------------------------------------------------------------------- */
+/* softer button radii */
+.VPButton {
+  border-radius: 10px !important;
+  transition: all 0.28s ease !important;
+}
+
+.VPButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(106, 153, 155, 0.18);
+}
+
+.dark .VPButton:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* ========================================================================
+ * Component: Home Hero
+ * ====================================================================== */
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
+  --vp-home-hero-name-background: linear-gradient(
     120deg,
-    #bd34fe 30%,
-    #41d1ff
+    #4a7a7c 0%,
+    #6a999b 25%,
+    #8abcbe 50%,
+    #6a999b 75%,
+    #4a7a7c 100%
   );
+  --vp-home-hero-name-background-size: 200% auto;
 
   --vp-home-hero-image-background-image: linear-gradient(
     -45deg,
-    #bd34fe 50%,
-    #47caff 50%
+    #5a8a8c 50%,
+    #8abcbe 50%
   );
   --vp-home-hero-image-filter: blur(44px);
 }
@@ -118,9 +202,203 @@
   }
 }
 
-/**
- * Component: Custom Block
- * -------------------------------------------------------------------------- */
+/* hero tagline text color */
+.VPHero .tagline {
+  color: var(--vp-c-text-2);
+}
+
+/* animated gradient text for hero name */
+.VPHero .name {
+  background: var(--vp-home-hero-name-background);
+  background-size: var(--vp-home-hero-name-background-size);
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: hero-name-gradient 4s linear infinite;
+}
+
+@keyframes hero-name-gradient {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* ========================================================================
+ * Component: Features — card-like styling from ref
+ * ====================================================================== */
+
+.VPFeature {
+  border-radius: 14px !important;
+  border: 1px solid var(--vp-c-border) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 1px 3px rgba(122, 154, 170, 0.08);
+  transition: all 0.28s ease !important;
+}
+
+.dark .VPFeature {
+  background: rgba(42, 48, 54, 0.9) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.VPFeature:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(122, 154, 170, 0.16);
+  border-color: var(--vp-c-brand-3) !important;
+}
+
+.dark .VPFeature:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  border-color: var(--vp-c-brand-3) !important;
+}
+
+.VPFeature .title {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+/* ========================================================================
+ * Navigation Bar — frosted glass (毛玻璃)
+ * ====================================================================== */
+
+/*
+ * VitePress nav layers (top → bottom):
+ *   .VPNavBar
+ *     .wrapper > .container > .content
+ *       .content::before   ← default opaque bg lives here
+ *     .divider             ← bottom border line
+ *
+ * Strategy: make the ::before pseudo semi-transparent and put the
+ * backdrop-filter on .VPNavBar itself so the blur covers the full bar.
+ */
+
+/* 1. strip the opaque bg VitePress paints on .content::before */
+.VPNavBar:not(.home) .content-body,
+.VPNavBar .content::before {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* 2. make the outer bar the glass layer */
+.VPNavBar {
+  background: rgba(248, 250, 251, 0.65) !important;
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border-bottom: 1px solid rgba(212, 220, 226, 0.45) !important;
+}
+
+.dark .VPNavBar {
+  background: rgba(28, 32, 36, 0.6) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* 3. hide the default hard divider — the border-bottom above replaces it */
+.VPNavBar .divider,
+.VPNavBar .divider-line {
+  display: none !important;
+}
+
+/* 4. ensure nested content wrappers are transparent so blur shows through */
+.VPNavBar .wrapper,
+.VPNavBar .container,
+.VPNavBar .content {
+  background: transparent !important;
+}
+
+/* active nav link: use brand color */
+.VPNavBarMenuLink.active,
+.VPNavBarMenuLink:hover {
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* nav bar title — slightly bolder for glass readability */
+.VPNavBarTitle .title {
+  font-weight: 600;
+}
+
+/* ========================================================================
+ * Sidebar — glassmorphism + softer styling
+ * ====================================================================== */
+
+.VPSidebar {
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  background: rgba(248, 250, 251, 0.85) !important;
+  border-right: 1px solid rgba(212, 220, 226, 0.6) !important;
+}
+
+.dark .VPSidebar {
+  background: rgba(28, 32, 36, 0.88) !important;
+  border-right: 1px solid rgba(58, 62, 68, 0.6) !important;
+}
+
+/* sidebar link active state */
+.VPSidebarItem.is-active > .item > .link > .text {
+  color: var(--vp-c-brand-1);
+}
+
+/* sidebar group title */
+.VPSidebarItem .text {
+  transition: color 0.18s ease;
+}
+
+/* ========================================================================
+ * Doc Content — refined styling
+ * ====================================================================== */
+
+/* inline code blocks */
+.vp-doc :not(pre) > code {
+  border-radius: 6px;
+  padding: 2px 6px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 0.875em;
+}
+
+/* code block container */
+.vp-doc div[class*="language-"] {
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(122, 154, 170, 0.08);
+}
+
+.dark .vp-doc div[class*="language-"] {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+/* links */
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration-color: rgba(106, 153, 155, 0.4);
+  transition: color 0.18s ease, text-decoration-color 0.18s ease;
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration-color: var(--vp-c-brand-2);
+}
+
+/* blockquote — softer left border */
+.vp-doc blockquote {
+  border-left-color: var(--vp-c-brand-3);
+  background: var(--vp-c-brand-soft);
+  border-radius: 0 8px 8px 0;
+  padding: 8px 16px;
+}
+
+/* table */
+.vp-doc table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.vp-doc tr {
+  border-color: var(--vp-c-divider);
+}
+
+/* ========================================================================
+ * Component: Custom Container / Callout Blocks
+ * ====================================================================== */
 
 :root {
   --vp-custom-block-tip-border: transparent;
@@ -129,11 +407,77 @@
   --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
 }
 
-/**
- * Component: Algolia
- * -------------------------------------------------------------------------- */
+.custom-block {
+  border-radius: 12px;
+}
+
+/* ========================================================================
+ * Component: DocSearch / Local Search
+ * ====================================================================== */
 
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+/* local search modal */
+.VPLocalSearchBox .result.selected {
+  border-color: var(--vp-c-brand-3);
+}
+
+/* ========================================================================
+ * Footer & Misc
+ * ====================================================================== */
+
+/* footer softer */
+.VPFooter {
+  border-top-color: var(--vp-c-divider) !important;
+}
+
+/* scrollbar (webkit only) — subtle teal tint */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(106, 153, 155, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(106, 153, 155, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(138, 188, 190, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(138, 188, 190, 0.35);
+}
+
+/* ========================================================================
+ * Animations & Transitions — matching ref project timing
+ * ====================================================================== */
+
+/* global smooth transitions for interactive elements */
+a,
+button,
+.VPSidebarItem .text,
+.VPNavBarMenuLink,
+.VPFeature,
+.VPButton {
+  transition: all 0.28s ease;
+}
+
+/* reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
