@@ -3,6 +3,7 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Power Electronics",
+  base: "/PowerElectronics.md/",
   description:
     "Lecture notes for Power Electronics (PE) course @ 2025-2026 Spring, Glasgow College, UESTC.",
 
