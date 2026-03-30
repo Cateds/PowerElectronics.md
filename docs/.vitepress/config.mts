@@ -4,6 +4,9 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "Power Electronics",
   base: "/PowerElectronics.md/",
+  markdown: {
+    math: true,
+  },
   description:
     "Lecture notes for Power Electronics (PE) course @ 2025-2026 Spring, Glasgow College, UESTC.",
 
@@ -31,13 +34,23 @@ export default defineConfig({
       { text: "StudyHub", link: "https://www.study-hub.store/" },
     ],
 
+    outline: [0, 4],
+
     sidebar: [
       {
-        text: "Examples",
+        text: "Part.1 器件",
         items: [
-          { text: "Markdown Examples", link: "/markdown-examples" },
-          { text: "Runtime API Examples", link: "/api-examples" },
+          {
+            text: "Lec.1 引言",
+            link: "/lectures/lec1",
+          },
         ],
+      },
+      {
+        text: "Part.2 电路和调制",
+      },
+      {
+        text: "Part.3 应用",
       },
     ],
 
