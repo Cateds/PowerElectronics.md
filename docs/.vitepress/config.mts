@@ -27,6 +27,14 @@ export default defineConfig({
   ],
 
   themeConfig: {
+    lastUpdated: {
+      text: "最近更新",
+      formatOptions: {
+        dateStyle: "full",
+        timeStyle: "medium",
+      },
+    },
+
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
