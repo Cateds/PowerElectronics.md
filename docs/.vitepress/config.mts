@@ -52,6 +52,14 @@ export default defineConfig({
             text: "Lec.1 引言",
             link: "/lectures/lec1",
           },
+          {
+            text: "Lec.2 电路复习",
+            link: "/lectures/lec2",
+          },
+          {
+            text: "Lec.3 功率开关",
+            link: "/lectures/lec3",
+          },
         ],
       },
       {

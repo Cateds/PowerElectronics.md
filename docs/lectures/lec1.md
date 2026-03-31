@@ -1,4 +1,8 @@
-# Lec.1 引言 (Introduction)
+# Lec.1 引言
+
+> **_Introduction_**
+>
+> Lecture @ 2026-3-30
 
 ## 课程安排
 
