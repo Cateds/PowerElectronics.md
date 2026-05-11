@@ -42,7 +42,7 @@ export default defineConfig({
       { text: "StudyHub", link: "https://www.study-hub.store/" },
     ],
 
-    outline: [0, 4],
+    outline: [2, 4],
 
     sidebar: [
       {
@@ -59,6 +59,22 @@ export default defineConfig({
           {
             text: "Lec.3 功率开关",
             link: "/lectures/lec3",
+          },
+          {
+            text: "Lec.4 不可控开关",
+            link: "/lectures/lec4",
+          },
+          {
+            text: "Lec.5 可控开关",
+            link: "/lectures/lec5",
+          },
+          {
+            text: "Lec.6 热管理",
+            link: "/lectures/lec6",
+          },
+          {
+            text: "Lec.7 DC-DC: Buck 转换器",
+            link: "/lectures/lec7",
           },
         ],
       },
