@@ -386,6 +386,95 @@
   padding: 8px 16px;
 }
 
+/* details / summary — drawer-like disclosure panels */
+.vp-doc details {
+  margin: 1rem 0;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 12px;
+  background: var(--vp-c-bg-elv);
+  box-shadow: 0 1px 3px rgba(122, 154, 170, 0.08);
+  overflow: hidden;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.dark .vp-doc details {
+  background: rgba(42, 48, 54, 0.9);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.vp-doc details > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  line-height: 1.2;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.vp-doc details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.vp-doc details > summary::marker {
+  content: "";
+}
+
+.vp-doc details > summary::after {
+  content: "";
+  margin-left: auto;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  opacity: 0.55;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.vp-doc details > summary:hover {
+  background: var(--vp-c-bg-soft);
+}
+
+.vp-doc details > summary:focus-visible {
+  outline: 2px solid var(--vp-c-brand-3);
+  outline-offset: -2px;
+}
+
+.vp-doc details[open] {
+  border-color: rgba(106, 153, 155, 0.4);
+  box-shadow: 0 10px 28px rgba(122, 154, 170, 0.12);
+}
+
+.dark .vp-doc details[open] {
+  border-color: rgba(138, 188, 190, 0.28);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
+}
+
+.vp-doc details[open] > summary {
+  background: var(--vp-c-brand-soft);
+  border-bottom-color: var(--vp-c-divider);
+}
+
+.vp-doc details[open] > summary::after {
+  transform: rotate(225deg);
+  opacity: 0.8;
+}
+
+.vp-doc details > summary ~ * {
+  margin: 0 1rem 0.7rem;
+}
+
+.vp-doc details > summary + * {
+  margin-top: 0.55rem;
+}
+
 /* table */
 .vp-doc table {
   border-radius: 8px;
