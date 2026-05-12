@@ -76,6 +76,10 @@ export default defineConfig({
             text: "Lec.7 DC-DC: Buck 转换器",
             link: "/lectures/lec7",
           },
+          {
+            text: "Lec.8 DC-DC: Boost & Buck-Boost",
+            link: "/lectures/lec8",
+          },
         ],
       },
       {
