@@ -1,4 +1,4 @@
-# Lec.8 DC-DC 开关转换器 - II : Buck 转换器 & Buck-Boost 转换器
+# Lec.8 DC-DC 开关转换器 - II : Boost 转换器 & Buck-Boost 转换器
 
 > **_Switched Mode DC-DC Converters - 2: Boost Converter, Buck-Boost Converter_**
 >
@@ -14,7 +14,7 @@ Boost 转换器的电路图如下所示：
 
 Boost 是一个升压转换器，用于将较小的输入电压 $V_{in}$ 转换成较大的输出电压 $V_{out}$。Boost 转换器的工作原理如下
 
-假设电路工作在连续模式，也就是电流始终在电感器中流动。在理想情况下，也就是二极管没有压降，电感没有内阻，然后
+假设电路工作在连续模式，也就是电流始终在电感器中流动。在理想情况下，也就是二极管没有压降，电感没有内阻
 
 - 当开关闭合时
   - 电容 $C$ 上的电压 (稳态工作时为 $V_{out}$) 使二极管工作在反向偏置状态，视为没有导通。
@@ -112,8 +112,8 @@ $$
 
 $$
 \begin{aligned}
-  & \Delta Q = C \Delta V_{out} = C \frac{\Delta V_{out}}{C} \\
-  \Rightarrow\ & \Delta V_{out} = \frac{I_o t_{on}}{C} = \frac{V_{out} t_{on}}{RC} \\
+  & \Delta Q = C \Delta V_{out} \\
+  \Rightarrow\ & \Delta V_{out} = \frac{\Delta Q}{C} = \frac{I_o t_{on}}{C} = \frac{V_{out} t_{on}}{RC} \\
   \Rightarrow\ & \frac{\Delta V_{out}}{V_{out}} = \frac{DT}{RC}
 \end{aligned}
 $$
@@ -234,8 +234,8 @@ $$
 
 $$
 \begin{aligned}
-  & \Delta Q = C \Delta V_{out} = C \frac{\Delta V_{out}}{C} \\
-  \Rightarrow\ & \Delta V_{out} = \frac{I_o t_{on}}{C} = \frac{V_{out} t_{on}}{RC} \\
+  & \Delta Q = C \Delta V_{out} \\
+  \Rightarrow\ & \Delta V_{out} = \frac{\Delta Q}{C} = \frac{I_o t_{on}}{C} = \frac{V_{out} t_{on}}{RC} \\
   \Rightarrow\ & \frac{\Delta V_{out}}{V_{out}} = \frac{DT}{RC}
 \end{aligned}
 $$
