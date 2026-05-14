@@ -72,6 +72,11 @@ export default defineConfig({
             text: "Lec.6 热管理",
             link: "/lectures/lec6",
           },
+        ],
+      },
+      {
+        text: "Part.2 电路和调制",
+        items: [
           {
             text: "Lec.7 DC-DC: Buck 转换器",
             link: "/lectures/lec7",
@@ -80,10 +85,11 @@ export default defineConfig({
             text: "Lec.8 DC-DC: Boost & Buck-Boost",
             link: "/lectures/lec8",
           },
+          {
+            text: "Lec.9 反激变换器 & 缓冲电路",
+            link: "/lectures/lec9",
+          },
         ],
-      },
-      {
-        text: "Part.2 电路和调制",
       },
       {
         text: "Part.3 应用",
