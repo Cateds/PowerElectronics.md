@@ -1,18 +1,18 @@
-# Lec.8 DC-DC 开关转换器 - II : Boost 转换器 & Buck-Boost 转换器
+# Lec.8 DC-DC 开关变换器 - II : Boost 变换器 & Buck-Boost 变换器
 
 > **_Switched Mode DC-DC Converters - 2: Boost Converter, Buck-Boost Converter_**
 >
 > Lecture @ 2026-5-11
 
-## Boost 转换器
+## Boost 变换器
 
 ### 电路原理
 
-Boost 转换器的电路图如下所示：
+Boost 变换器的电路图如下所示：
 
 ![boost circuit](lec8.assets/image.png)
 
-Boost 是一个升压转换器，用于将较小的输入电压 $V_{in}$ 转换成较大的输出电压 $V_{out}$。Boost 转换器的工作原理如下
+Boost 是一个升压变换器，用于将较小的输入电压 $V_{in}$ 转换成较大的输出电压 $V_{out}$。Boost 变换器的工作原理如下
 
 假设电路工作在连续模式，也就是电流始终在电感器中流动。在理想情况下，也就是二极管没有压降，电感没有内阻
 
@@ -80,7 +80,7 @@ $$
 
 ### 电感电流
 
-类似的，假设 Boost 转换器是一个理想电路，也就是输入输出功率相等 $P_{in} = P_{out}$，可以得到
+类似的，假设 Boost 变换器是一个理想电路，也就是输入输出功率相等 $P_{in} = P_{out}$，可以得到
 
 $$
 \begin{aligned}
@@ -134,11 +134,11 @@ $$
 
 </details>
 
-## Buck-Boost 转换器
+## Buck-Boost 变换器
 
 ### 电路原理
 
-Buck-Boost 转换器的电路图如下所示：
+Buck-Boost 变换器的电路图如下所示：
 
 ![buck-boost circuit](lec8.assets/image-7.png)
 
@@ -204,7 +204,7 @@ $$
 
 ### 电感电流
 
-同样的，假设 Buck-Boost 转换器是一个理想电路，也就是输入输出功率相等 $P_{in} = P_{out}$，可以得到
+同样的，假设 Buck-Boost 变换器是一个理想电路，也就是输入输出功率相等 $P_{in} = P_{out}$，可以得到
 
 $$
 \begin{aligned}
@@ -253,10 +253,10 @@ $$
 
 ## 总结
 
-对于理想情况下的三种 DC-DC 开关转换器，他们的电压关系和电流关系如下所示：
+对于理想情况下的三种 DC-DC 开关变换器，他们的电压关系和电流关系如下所示：
 
 ![converter summary](lec8.assets/image-13.png)
 
-三种转换器在导通、关断情况下的电流路径如下所示：
+三种变换器在导通、关断情况下的电流路径如下所示：
 
 ![switch / charge&discharge](lec8.assets/image-14.png)
