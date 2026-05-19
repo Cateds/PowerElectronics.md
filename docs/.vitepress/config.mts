@@ -78,20 +78,24 @@ export default defineConfig({
         text: "Part.2 电路和调制",
         items: [
           {
-            text: "Lec.7 DC-DC: Buck 变换器",
+            text: "Lec.7 Buck 变换器",
             link: "/lectures/lec7",
           },
           {
-            text: "Lec.8 DC-DC: Boost & Buck-Boost",
+            text: "Lec.8 Boost & Buck-Boost",
             link: "/lectures/lec8",
           },
           {
-            text: "Lec.9 DC-DC 反激变换器 & 缓冲电路",
+            text: "Lec.9 反激变换器 & 缓冲电路",
             link: "/lectures/lec9",
           },
           {
-            text: "Lec.10 DC-AC 半桥逆变器",
+            text: "Lec.10 半桥逆变器",
             link: "/lectures/lec10",
+          },
+          {
+            text: "Lec.11 全桥逆变器",
+            link: "/lectures/lec11",
           },
         ],
       },
