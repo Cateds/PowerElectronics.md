@@ -27,6 +27,8 @@ export default defineConfig({
   ],
 
   themeConfig: {
+    search: { provider: "local" },
+
     lastUpdated: {
       text: "最近更新",
       formatOptions: {
