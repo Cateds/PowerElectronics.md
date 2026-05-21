@@ -150,7 +150,7 @@ $$
 
 未来发展的方向则是更高效、高功率、更快、更智能的功率开关。
 
-比如 集成⻔极换流晶闸管 (ICGT, Integrated Gate-Commutated Thyristor)，它结合了晶闸管的高电流承载能力和 MOSFET 的快速开关特性，适用于高功率、高频率的应用场景。
+比如集成门极换流晶闸管 (ICGT, Integrated Gate-Commutated Thyristor)，它结合了晶闸管的高电流承载能力和 MOSFET 的快速开关特性，适用于高功率、高频率的应用场景。
 
 ![icgt](lec3.assets/image-6.png)
 
