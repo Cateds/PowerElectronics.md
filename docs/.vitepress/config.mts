@@ -99,10 +99,20 @@ export default defineConfig({
             text: "Lec.11 全桥逆变器",
             link: "/lectures/lec11",
           },
+          {
+            text: "Lec.12 三桥臂逆变器",
+            link: "/lectures/lec12",
+          },
         ],
       },
       {
         text: "Part.3 应用",
+        items: [
+          {
+            text: "Lec.13 应用与系统",
+            link: "/lectures/lec13",
+          },
+        ],
       },
     ],
 
