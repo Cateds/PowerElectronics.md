@@ -1,6 +1,7 @@
 slides/
 
 # -------------------- Generated --------------------
+pdf-output/
 
 # Logs
 logs

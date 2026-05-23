@@ -1,0 +1,51 @@
+name: Build & Attach PDF to Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install
+      - name: Install Chromium deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libnspr4 libatk1.0-0t64 libatk-bridge2.0-0t64 \
+            libcups2t64 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 \
+            libgbm1 libpango-1.0-0 libcairo2 libasound2t64 libxshmfence1
+      - name: Build VitePress site
+        run: bun run docs:build
+      - name: Generate PDF
+        run: bun run export-pdf --skip-build
+        env:
+          CI: true
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Generate changelog
+        id: changelog
+        run: |
+          PREV_TAG=$(git tag --sort=-version:refname | head -2 | tail -1)
+          if [ -z "$PREV_TAG" ]; then
+            LOG=$(git log --pretty=format:"- %s" --no-merges)
+          else
+            LOG=$(git log --pretty=format:"- %s" --no-merges "$PREV_TAG"..HEAD)
+          fi
+          echo "log<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$LOG" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+      - name: Upload PDF to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body: ${{ steps.changelog.outputs.log }}
+          files: pdf-output/*.pdf

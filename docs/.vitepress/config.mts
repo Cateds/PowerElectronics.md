@@ -6,6 +6,9 @@ import path from "node:path";
 export default defineConfig({
   title: "Power Electronics",
   base: "/PowerElectronics.md/",
+  sitemap: {
+    hostname: "https://cateds.github.io/PowerElectronics.md/",
+  },
   markdown: {
     math: true,
   },
