@@ -3,6 +3,7 @@ import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import GiscusComments from './components/GiscusComments.vue'
 import './style.css'
 
 export default {
@@ -21,6 +22,11 @@ export default {
             h('span', { class: 'divider' }, '·'),
             h('span', `约 ${frontmatter.value.readTime} 分钟`)
           ])
+        }
+      },
+      'doc-after': () => {
+        if (frontmatter.value.layout !== 'home') {
+          return h(GiscusComments)
         }
       }
     })
