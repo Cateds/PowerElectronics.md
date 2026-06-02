@@ -16,17 +16,17 @@ export default defineConfig({
     "Lecture notes for Power Electronics (PE) course @ 2025-2026 Spring, Glasgow College, UESTC.",
 
   transformPageData(pageData, ctx) {
-    const fullPath = path.join(ctx.siteConfig.srcDir, pageData.filePath)
+    const fullPath = path.join(ctx.siteConfig.srcDir, pageData.filePath);
     if (!fs.existsSync(fullPath)) return;
-    
-    const content = fs.readFileSync(fullPath, 'utf-8')
-    const body = content.replace(/^---[\s\S]*?---/, '')
-    const words = body.match(/[\u4E00-\u9FA5]|[a-zA-Z0-9_\-]+/g)
-    const wordCount = words ? words.length : 0
-    const readTime = Math.ceil(wordCount / 275) || 1
-    
-    pageData.frontmatter.wordCount = wordCount
-    pageData.frontmatter.readTime = readTime
+
+    const content = fs.readFileSync(fullPath, "utf-8");
+    const body = content.replace(/^---[\s\S]*?---/, "");
+    const words = body.match(/[\u4E00-\u9FA5]|[a-zA-Z0-9_\-]+/g);
+    const wordCount = words ? words.length : 0;
+    const readTime = Math.ceil(wordCount / 275) || 1;
+
+    pageData.frontmatter.wordCount = wordCount;
+    pageData.frontmatter.readTime = readTime;
   },
 
   head: [
@@ -59,6 +59,11 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
+      { text: "GitHub", link: "https://github.com/Cateds/PowerElectronics.md" },
+      {
+        text: "PDF Version",
+        link: "https://github.com/Cateds/PowerElectronics.md/releases",
+      },
       { text: "Author", link: "https://cateds.github.io/" },
       { text: "StudyHub", link: "https://www.study-hub.store/" },
     ],

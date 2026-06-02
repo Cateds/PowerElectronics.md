@@ -16,6 +16,9 @@ hero:
     - theme: alt
       text: 作者主页
       link: https://cateds.github.io/
+    - theme: alt
+      text: PDF 版本
+      link: https://github.com/Cateds/PowerElectronics.md/releases
 ---
 
 如果有帮助的话，欢迎在 GitHub 上给本项目点个 Star ⭐️
