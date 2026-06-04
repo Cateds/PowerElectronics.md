@@ -3,6 +3,8 @@
 > **_Power Diode and Diode Rectifier_**
 >
 > Lecture @ 2026-4-7
+>
+> 你的意思是你在上课时讲完了这个堪比模电压缩饼干的内容吗，我中无量空处了？
 
 ## 功率二极管
 
