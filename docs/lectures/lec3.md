@@ -80,7 +80,7 @@ $$
     - 晶闸管 (Thyristor)
       - 可以通过触发信号控制导通，但无法控制关断
   - 完全可控
-    - 双极晶体管 (GTR)
+    - 大功率晶体管 (GTR)
     - 金属氧化物半导体场效应晶体管 (MOSFET)
     - 绝缘栅双极晶体管 (IGBT)
     - 可关断晶闸管 (GTO)
@@ -93,7 +93,7 @@ $$
     - 绝缘栅双极晶体管 (IGBT)
     - MOS 控制的晶闸管 (MCT)
   - 电流驱动
-    - 双极晶体管 (GTR)
+    - 大功率晶体管 (GTR)
     - 可关断晶闸管 (GTO)
     - 晶闸管 (Thyristor)
 
@@ -127,7 +127,7 @@ $$
   - 氮化镓 (GaN, Gallium Nitride)
 - **封装**
   - 高压集成电路 (HVIC, High Voltage Integrated Circuit)
-  - 智能功率集成电路 (IPIC, Intelligent Power Integrated Circuit)
+  - 智能功率集成电路 (SPIC, Smart Power Integrated Circuit)
   - 智能功率模块 (IPM, Intelligent Power Module)
 
 ---
@@ -150,9 +150,9 @@ $$
 
 未来发展的方向则是更高效、高功率、更快、更智能的功率开关。
 
-比如集成门极换流晶闸管 (ICGT, Integrated Gate-Commutated Thyristor)，它结合了晶闸管的高电流承载能力和 MOSFET 的快速开关特性，适用于高功率、高频率的应用场景。
+比如集成门极换流晶闸管 (IGCT, Integrated Gate-Commutated Thyristor)，它结合了晶闸管的高电流承载能力和 MOSFET 的快速开关特性，适用于高功率、高频率的应用场景。
 
-![icgt](lec3.assets/image-6.png)
+![IGCT](lec3.assets/image-6.png)
 
 以及 GaN 和 SiC 等宽禁带半导体器件，它们具有更高的击穿电压、更快的开关速度和更低的导通损耗，适用于高频率、高效率的应用场景。
 
