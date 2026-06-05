@@ -36,9 +36,9 @@
 | --------------------------- | ----------------------------------- | -------- | -------- | -------- | ---------- | ----------- |
 | 晶闸管 (SCR)                | ![scr](lec5.assets/image-19.png)    | 半可控   | 非常高   | 慢       | 自然换流   | 交流        |
 | 双向晶闸管 (TRIAC / SSR)    | ![traic](lec5.assets/image-30.png)  | 半可控   | 中等     | 慢       | 自然换流   | 交流        |
-| 可关断晶闸管 (GTO)          | ![gto](lec5.assets/image-36.png)    | 完全可控 | 高       | 慢       | 自强迫换流 | 交流 & 直流 |
-| 场效应管 (MOSFET)           | ![mosfet](lec5.assets/image-40.png) | 完全可控 | 中等     | 快       | 自强迫换流 | 直流        |
-| 绝缘栅极双极型晶体管 (IGBT) | ![igbt](lec5.assets/image-39.png)   | 完全可控 | 高       | 中等     | 自强迫换流 | 直流        |
+| 可关断晶闸管 (GTO)          | ![gto](lec5.assets/image-36.png)    | 完全可控 | 高       | 慢       | 自换流 | 交流 & 直流 |
+| 场效应管 (MOSFET)           | ![mosfet](lec5.assets/image-40.png) | 完全可控 | 中等     | 快       | 自换流 | 直流        |
+| 绝缘栅极双极型晶体管 (IGBT) | ![igbt](lec5.assets/image-39.png)   | 完全可控 | 高       | 中等     | 自换流 | 直流        |
 
 ## 晶闸管 (SCR)
 
