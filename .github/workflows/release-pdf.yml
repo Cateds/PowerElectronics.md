@@ -19,12 +19,19 @@ jobs:
           bun-version: latest
       - name: Install Dependencies
         run: bun install
-      - name: Install Chromium deps
+      - name: Install system deps & fonts
         run: |
           sudo apt-get update
           sudo apt-get install -y libnss3 libnspr4 libatk1.0-0t64 libatk-bridge2.0-0t64 \
             libcups2t64 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 \
-            libgbm1 libpango-1.0-0 libcairo2 libasound2t64 libxshmfence1
+            libgbm1 libpango-1.0-0 libcairo2 libasound2t64 libxshmfence1 \
+            fonts-noto-cjk fonts-noto-cjk-extra fonts-cascadia-code
+          # Inter font (not in apt repo, download manually)
+          mkdir -p ~/.fonts
+          wget -q "https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip" -O /tmp/Inter-4.1.zip
+          unzip -qo /tmp/Inter-4.1.zip -d /tmp/Inter-4.1
+          find /tmp/Inter-4.1 -name "Inter*.ttf" ! -path "*/InterDisplay/*" -exec cp {} ~/.fonts/ \;
+          fc-cache -f ~/.fonts
       - name: Build VitePress site
         run: bun run docs:build
       - name: Generate PDF
@@ -34,8 +41,10 @@ jobs:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
       - name: Generate changelog
         id: changelog
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          PREV_TAG=$(git tag --sort=-version:refname | head -2 | tail -1)
+          PREV_TAG=$(gh release list --limit 2 --json tagName --jq '.[1].tagName // empty' 2>/dev/null || true)
           if [ -z "$PREV_TAG" ]; then
             LOG=$(git log --pretty=format:"- %s" --no-merges)
           else
