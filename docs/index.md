@@ -1,11 +1,4 @@
 ---
-# 电力电子学笔记
-
-电力电子学（Power Electronics）是电气工程的一个分支，利用电子开关器件（如二极管、MOSFET、IGBT 等）实现对电能的高效变换与控制。本笔记依据 P. T. Krein 所著 *Elements of Power Electronics* (2nd ed., Oxford University Press, 2016) 英文影印版整理而成。
-
-> 引文格式：Krein, Philip T. *Elements of Power Electronics*. 2nd ed., Oxford University Press, 2016. 英文影印版。
-
----
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 title: Power Electronics
