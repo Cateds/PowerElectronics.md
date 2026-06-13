@@ -60,6 +60,47 @@ function llmsDevPlugin() {
   };
 }
 
+function tokenizeSearchText(text: string) {
+  const rawTokens = text.toLowerCase().match(/[\p{Script=Han}]+|[a-z0-9][a-z0-9_-]*/giu);
+  if (!rawTokens) return [];
+
+  const terms = new Set<string>();
+  const segmenter = typeof Intl !== "undefined" && "Segmenter" in Intl
+    ? new (Intl as any).Segmenter("zh", { granularity: "word" })
+    : undefined;
+
+  function addCjkTerm(term: string) {
+    const chars = Array.from(term);
+    if (!chars.length) return;
+
+    terms.add(term);
+    for (let size = 2; size <= Math.min(3, chars.length); size++) {
+      for (let i = 0; i <= chars.length - size; i++) {
+        terms.add(chars.slice(i, i + size).join(""));
+      }
+    }
+  }
+
+  for (const token of rawTokens) {
+    if (/^[\p{Script=Han}]+$/u.test(token)) {
+      addCjkTerm(token);
+      if (segmenter) {
+        for (const part of segmenter.segment(token)) {
+          if (part.isWordLike !== false) addCjkTerm(part.segment);
+        }
+      }
+      continue;
+    }
+
+    terms.add(token);
+    for (const part of token.split(/[_-]+/)) {
+      if (part) terms.add(part);
+    }
+  }
+
+  return Array.from(terms);
+}
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Power Electronics",
@@ -112,7 +153,17 @@ export default defineConfig({
   ],
 
   themeConfig: {
-    search: { provider: "local" },
+    search: {
+      provider: "local",
+      options: {
+        detailedView: true,
+        miniSearch: {
+          options: {
+            tokenize: tokenizeSearchText,
+          },
+        },
+      },
+    },
 
     lastUpdated: {
       text: "最近更新",
