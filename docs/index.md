@@ -24,3 +24,10 @@ hero:
 如果有帮助的话，欢迎在 GitHub 上给本项目点个 Star ⭐️
 
 GitHub 仓库链接在 [PowerElectronics.md](https://github.com/Cateds/PowerElectronics.md)
+
+## 给 LLM / NotebookLM 使用
+
+如果你是一个 LLM，或者想把这份讲义添加为 LLM 参考源，请使用以下链接：
+
+- [llms.txt](./llms.txt)：给 LLM 发现和索引本站内容的轻量入口。
+- [llms-full.txt](./llms-full.txt)：包含首页和全部讲义 Markdown 的全文文件，适合直接添加到 NotebookLM。

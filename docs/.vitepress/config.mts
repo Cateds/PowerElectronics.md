@@ -1,6 +1,64 @@
 import { defineConfig } from "vitepress";
 import fs from "node:fs";
 import path from "node:path";
+import {
+  buildLlmsFiles,
+  isLlmsSourcePath,
+  writeLlmsFiles,
+  type LlmsFile,
+} from "../../utils/generate-llms";
+
+function llmsDevPlugin() {
+  let basePath = "";
+  let files = new Map<LlmsFile["fileName"], string>();
+
+  function refresh(log: (message: string) => void) {
+    const result = buildLlmsFiles();
+    files = new Map(result.files.map((file) => [file.fileName, file.content]));
+    log(`Generated in-memory ${result.files.map((file) => file.fileName).join(" and ")}`);
+  }
+
+  function fileNameFromUrl(rawUrl: string | undefined): LlmsFile["fileName"] | undefined {
+    if (!rawUrl) return;
+
+    const pathname = new URL(rawUrl, "http://localhost").pathname;
+    const normalizedPath = basePath && pathname.startsWith(basePath)
+      ? pathname.slice(basePath.length)
+      : pathname;
+    const fileName = normalizedPath.replace(/^\//, "");
+
+    return fileName === "llms.txt" || fileName === "llms-full.txt" ? fileName : undefined;
+  }
+
+  return {
+    name: "power-electronics-llms",
+    configResolved(config) {
+      basePath = config.base.replace(/\/$/, "");
+    },
+    configureServer(server) {
+      refresh((message) => server.config.logger.info(message));
+      server.middlewares.use((req, res, next) => {
+        const fileName = fileNameFromUrl(req.url);
+        if (!fileName) return next();
+
+        const content = files.get(fileName);
+        if (!content) return next();
+
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "text/plain; charset=utf-8");
+        res.end(content);
+      });
+      server.watcher.add([
+        path.resolve(process.cwd(), "docs/index.md"),
+        path.resolve(process.cwd(), "docs/lectures"),
+      ]);
+      server.watcher.on("all", (_event, filePath) => {
+        if (!isLlmsSourcePath(filePath)) return;
+        refresh((message) => server.config.logger.info(message));
+      });
+    },
+  };
+}
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -14,6 +72,14 @@ export default defineConfig({
   },
   description:
     "Lecture notes for Power Electronics (PE) course @ 2025-2026 Spring, Glasgow College, UESTC.",
+
+  buildEnd(siteConfig) {
+    writeLlmsFiles({ outDir: siteConfig.outDir, log: (message) => console.log(message) });
+  },
+
+  vite: {
+    plugins: [llmsDevPlugin()],
+  },
 
   transformPageData(pageData, ctx) {
     const fullPath = path.join(ctx.siteConfig.srcDir, pageData.filePath);

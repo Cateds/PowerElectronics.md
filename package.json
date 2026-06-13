@@ -7,6 +7,7 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
+    "docs:llms": "bun run utils/generate-llms.ts",
     "export-pdf": "bun run utils/export-pdf.ts"
   },
   "devDependencies": {
