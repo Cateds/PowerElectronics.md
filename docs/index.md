@@ -31,3 +31,7 @@ GitHub 仓库链接在 [PowerElectronics.md](https://github.com/Cateds/PowerElec
 
 - [llms.txt](./llms.txt)：给 LLM 发现和索引本站内容的轻量入口。
 - [llms-full.txt](./llms-full.txt)：包含首页和全部讲义 Markdown 的全文文件，适合直接添加到 NotebookLM。
+
+## 许可证
+
+本作品采用 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) 许可证发布。

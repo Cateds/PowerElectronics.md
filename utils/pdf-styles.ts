@@ -48,6 +48,30 @@ body {
   color: #8a969e;
 }
 
+.cover .license {
+  margin-top: 1em;
+  font-size: 9pt;
+  color: #8a969e;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.cover .license svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: #6a999b;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cover .license a {
+  color: #6a999b;
+  text-decoration: none;
+}
+
 .cover .links {
   margin-top: 2.5em;
   display: flex;

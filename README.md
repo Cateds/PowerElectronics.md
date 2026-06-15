@@ -9,3 +9,7 @@
 如果有帮助的话，欢迎在 GitHub 上给本项目点个 Star ⭐️
 
 如果能开一个 Pull Request 来补充内容就更好了。
+
+## 许可证
+
+本作品采用 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) 许可证发布。

@@ -76,6 +76,10 @@ export function buildHtml(
     <p class="sub">课程笔记${opts.tag ? ` · ${escapeHtml(opts.tag)}` : ""}</p>
     <p class="author">by ${escapeHtml(opts.authorName)}</p>
     <p class="date">${date}</p>
+    <p class="license">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+    </p>
     <div class="links">
       <a href="${opts.siteUrl}">
         <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
