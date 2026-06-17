@@ -31,7 +31,64 @@ export default {
       }
     })
   },
-  enhanceApp({ app, router, siteData }) {
-    // ...
+  enhanceApp({ router }) {
+    if (typeof window === 'undefined') return
+
+    let routeFadeTimer: number | undefined
+
+    router.onAfterRouteChange = () => {
+      const root = document.documentElement
+
+      root.classList.remove('route-fade')
+      window.clearTimeout(routeFadeTimer)
+
+      window.requestAnimationFrame(() => {
+        root.classList.add('route-fade')
+        routeFadeTimer = window.setTimeout(() => {
+          root.classList.remove('route-fade')
+        }, 260)
+      })
+    }
+
+    // Search exit animation — intercept close triggers, animate out, then close
+    let searchAnimating = false
+    const EXIT_MS = 180
+
+    function animateSearchExit(box: HTMLElement, close: () => void) {
+      if (searchAnimating) return
+      searchAnimating = true
+      box.classList.add('exiting')
+      setTimeout(() => {
+        close()
+        searchAnimating = false
+      }, EXIT_MS)
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.isTrusted || searchAnimating) return
+      const target = e.target instanceof HTMLElement ? e.target : null
+      if (!target) return
+      const backdrop = target.closest('.VPLocalSearchBox .backdrop')
+      if (!backdrop) return
+      const box = backdrop.closest('.VPLocalSearchBox') as HTMLElement | null
+      if (!box) return
+
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+      animateSearchExit(box, () => { (backdrop as HTMLElement).click() })
+    }, true)
+
+    document.addEventListener('keydown', (e) => {
+      if (!e.isTrusted || e.key !== 'Escape' || searchAnimating) return
+      const box = document.querySelector('.VPLocalSearchBox') as HTMLElement | null
+      if (!box) return
+
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+      const input = box.querySelector('input') as HTMLElement | null
+      animateSearchExit(box, () => {
+        input?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+      })
+    }, true)
   }
 } satisfies Theme

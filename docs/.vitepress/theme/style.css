@@ -478,7 +478,7 @@
 /* table */
 .vp-doc table {
   display: block;
-  width: max-content;
+  width: fit-content;
   max-width: 100%;
   margin-inline: auto;
   border-radius: 8px;
@@ -514,6 +514,25 @@
 }
 
 /* local search modal */
+.VPLocalSearchBox .backdrop {
+  background: var(--vp-backdrop-bg-color);
+  backdrop-filter: blur(12px) saturate(0.9);
+  -webkit-backdrop-filter: blur(12px) saturate(0.9);
+  animation: search-backdrop-in 0.26s ease-out backwards;
+}
+
+.VPLocalSearchBox.exiting .backdrop {
+  animation: search-backdrop-out 0.18s ease-in forwards;
+}
+
+.VPLocalSearchBox .shell {
+  animation: search-shell-in 0.26s ease-out both;
+}
+
+.VPLocalSearchBox.exiting .shell {
+  animation: search-shell-out 0.18s ease-in forwards;
+}
+
 .VPLocalSearchBox .result.selected {
   border-color: var(--vp-c-brand-3);
 }
@@ -566,6 +585,51 @@ button,
 .VPFeature,
 .VPButton {
   transition: all 0.28s ease;
+}
+
+html.route-fade .VPContent {
+  animation: route-fade-in 0.26s ease-out both;
+}
+
+@keyframes route-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes search-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes search-shell-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes search-backdrop-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes search-shell-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(4px) scale(0.985);
+  }
 }
 
 /* reduce motion for users who prefer it */
