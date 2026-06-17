@@ -1,4 +1,11 @@
-import { defineConfig } from "vitepress";
+import {
+  defineConfig,
+  type PageData,
+  type SiteConfig,
+  type TransformPageContext,
+} from "vitepress";
+import type { ViteDevServer } from "vite";
+import type { IncomingMessage, ServerResponse } from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import {
@@ -15,44 +22,53 @@ function llmsDevPlugin() {
   function refresh(log: (message: string) => void) {
     const result = buildLlmsFiles();
     files = new Map(result.files.map((file) => [file.fileName, file.content]));
-    log(`Generated in-memory ${result.files.map((file) => file.fileName).join(" and ")}`);
+    log(
+      `Generated in-memory ${result.files.map((file) => file.fileName).join(" and ")}`,
+    );
   }
 
-  function fileNameFromUrl(rawUrl: string | undefined): LlmsFile["fileName"] | undefined {
+  function fileNameFromUrl(
+    rawUrl: string | undefined,
+  ): LlmsFile["fileName"] | undefined {
     if (!rawUrl) return;
 
     const pathname = new URL(rawUrl, "http://localhost").pathname;
-    const normalizedPath = basePath && pathname.startsWith(basePath)
-      ? pathname.slice(basePath.length)
-      : pathname;
+    const normalizedPath =
+      basePath && pathname.startsWith(basePath)
+        ? pathname.slice(basePath.length)
+        : pathname;
     const fileName = normalizedPath.replace(/^\//, "");
 
-    return fileName === "llms.txt" || fileName === "llms-full.txt" ? fileName : undefined;
+    return fileName === "llms.txt" || fileName === "llms-full.txt"
+      ? fileName
+      : undefined;
   }
 
   return {
     name: "power-electronics-llms",
-    configResolved(config) {
+    configResolved(config: { base: string }) {
       basePath = config.base.replace(/\/$/, "");
     },
-    configureServer(server) {
+    configureServer(server: ViteDevServer) {
       refresh((message) => server.config.logger.info(message));
-      server.middlewares.use((req, res, next) => {
-        const fileName = fileNameFromUrl(req.url);
-        if (!fileName) return next();
+      server.middlewares.use(
+        (req: IncomingMessage, res: ServerResponse, next: () => void) => {
+          const fileName = fileNameFromUrl(req.url);
+          if (!fileName) return next();
 
-        const content = files.get(fileName);
-        if (!content) return next();
+          const content = files.get(fileName);
+          if (!content) return next();
 
-        res.statusCode = 200;
-        res.setHeader("Content-Type", "text/plain; charset=utf-8");
-        res.end(content);
-      });
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "text/plain; charset=utf-8");
+          res.end(content);
+        },
+      );
       server.watcher.add([
         path.resolve(process.cwd(), "docs/index.md"),
         path.resolve(process.cwd(), "docs/lectures"),
       ]);
-      server.watcher.on("all", (_event, filePath) => {
+      server.watcher.on("all", (_event: string, filePath: string) => {
         if (!isLlmsSourcePath(filePath)) return;
         refresh((message) => server.config.logger.info(message));
       });
@@ -61,13 +77,16 @@ function llmsDevPlugin() {
 }
 
 function tokenizeSearchText(text: string) {
-  const rawTokens = text.toLowerCase().match(/[\p{Script=Han}]+|[a-z0-9][a-z0-9_-]*/giu);
+  const rawTokens = text
+    .toLowerCase()
+    .match(/[\p{Script=Han}]+|[a-z0-9][a-z0-9_-]*/giu);
   if (!rawTokens) return [];
 
   const terms = new Set<string>();
-  const segmenter = typeof Intl !== "undefined" && "Segmenter" in Intl
-    ? new (Intl as any).Segmenter("zh", { granularity: "word" })
-    : undefined;
+  const segmenter: Intl.Segmenter | undefined =
+    typeof Intl !== "undefined" && "Segmenter" in Intl
+      ? new Intl.Segmenter("zh", { granularity: "word" })
+      : undefined;
 
   function addCjkTerm(term: string) {
     const chars = Array.from(term);
@@ -114,15 +133,18 @@ export default defineConfig({
   description:
     "Lecture notes for Power Electronics (PE) course @ 2025-2026 Spring, Glasgow College, UESTC.",
 
-  buildEnd(siteConfig) {
-    writeLlmsFiles({ outDir: siteConfig.outDir, log: (message) => console.log(message) });
+  buildEnd(siteConfig: SiteConfig) {
+    writeLlmsFiles({
+      outDir: siteConfig.outDir,
+      log: (message) => console.log(message),
+    });
   },
 
   vite: {
     plugins: [llmsDevPlugin()],
   },
 
-  transformPageData(pageData, ctx) {
+  transformPageData(pageData: PageData, ctx: TransformPageContext) {
     const fullPath = path.join(ctx.siteConfig.srcDir, pageData.filePath);
     if (!fs.existsSync(fullPath)) return;
 
@@ -253,6 +275,19 @@ export default defineConfig({
             text: "Lec.13 应用与系统",
             link: "/lectures/lec13",
           },
+        ],
+      },
+      {
+        text: "Extra. 附录",
+        items: [
+          {
+            text: "往年题知识点汇总",
+            link: "/papers/stats",
+          },
+          {
+            text: "公式汇总",
+            link: "/papers/formula",
+          }
         ],
       },
     ],

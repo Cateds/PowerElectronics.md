@@ -477,8 +477,13 @@
 
 /* table */
 .vp-doc table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
   border-radius: 8px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .vp-doc tr {
