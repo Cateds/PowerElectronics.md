@@ -11,11 +11,12 @@ export function rewriteInternalLinks(
   const pathToIndex = new Map<string, number>();
   for (let i = 0; i < articles.length; i++) {
     const p = normalizePath(articles[i].path);
+    const pNoLead = p.replace(/^\//, "");
     pathToIndex.set(p, i);
     pathToIndex.set(p + "/", i);
-    pathToIndex.set(pathPrefix + p, i);
-    pathToIndex.set(pathPrefix + p + "/", i);
-    pathToIndex.set(pathPrefix + p + ".html", i);
+    pathToIndex.set(pathPrefix + pNoLead, i);
+    pathToIndex.set(pathPrefix + pNoLead + "/", i);
+    pathToIndex.set(pathPrefix + pNoLead + ".html", i);
   }
 
   for (let i = 0; i < articles.length; i++) {
@@ -69,6 +70,10 @@ function resolveHref(
   let cleanHref = rawHref;
   if (cleanHref.startsWith(pathPrefix)) {
     cleanHref = cleanHref.slice(pathPrefix.length);
+  }
+  cleanHref = cleanHref.replace(/^\.\//, "");
+  if (!cleanHref.startsWith("/")) {
+    cleanHref = "/" + cleanHref;
   }
   cleanHref = normalizePath(cleanHref);
 

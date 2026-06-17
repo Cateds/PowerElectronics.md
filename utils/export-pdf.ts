@@ -23,6 +23,25 @@ const PARTS: PartDef[] = [
   { label: "Part.3 应用", startIndex: 12 },
 ];
 
+// Matches sidebar link order in config.mts, without .html suffix
+const SIDEBAR_ORDER = [
+  "/lectures/lec1",
+  "/lectures/lec2",
+  "/lectures/lec3",
+  "/lectures/lec4",
+  "/lectures/lec5",
+  "/lectures/lec6",
+  "/lectures/lec7",
+  "/lectures/lec8",
+  "/lectures/lec9",
+  "/lectures/lec10",
+  "/lectures/lec11",
+  "/lectures/lec12",
+  "/lectures/lec13",
+  "/papers/stats",
+  "/papers/formula",
+];
+
 const SKIP_BUILD = process.argv.includes("--skip-build");
 const CI = process.env.CI === "true";
 const TAG =
@@ -158,8 +177,14 @@ async function main() {
             const parts = task.localPath.replace(/\/$/, "").split("/").filter(Boolean);
             const folder = parts.length > 0 ? parts[0] : ".";
             const fileName = parts.length > 1 ? parts[parts.length - 1] : "index";
+            const normalized = task.localPath.replace(/\.html$/, "").replace(/\/$/, "") || "/";
+            const sidebarIndex = SIDEBAR_ORDER.indexOf(normalized);
             const sortKey =
-              fileName === "index" ? `${folder}/__00_index` : `${folder}/${fileName}`;
+              sidebarIndex >= 0
+                ? String(sidebarIndex).padStart(4, "0")
+                : fileName === "index"
+                  ? `${folder}/__00_index`
+                  : `${folder}/${fileName}`;
 
             articles.push({
               path: task.localPath,

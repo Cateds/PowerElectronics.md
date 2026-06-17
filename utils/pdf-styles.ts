@@ -267,7 +267,7 @@ body {
   border-collapse: collapse;
   font-size: 9pt;
   margin: 0.5em 0;
-  break-inside: avoid;
+  break-inside: auto;
 }
 
 .a-content th {
