@@ -1,7 +1,7 @@
 import { type ArticleData } from "./build-html";
 
 function normalizePath(p: string): string {
-  return p.replace(/\/+$/, "").replace(/\.html$/, "") || "/";
+  return p.replace(/\/+$/, "").replace(/\.html(#|$)/, "$1") || "/";
 }
 
 export function rewriteInternalLinks(
@@ -49,7 +49,16 @@ function resolveHref(
 ): string {
   if (
     rawHref.startsWith("http://") ||
-    rawHref.startsWith("https://") ||
+    rawHref.startsWith("https://")
+  ) {
+    const url = new URL(rawHref);
+    if (url.hostname === "localhost") {
+      rawHref = url.pathname + url.search + url.hash;
+    } else {
+      return rawHref;
+    }
+  }
+  if (
     rawHref.startsWith("mailto:") ||
     rawHref.startsWith("data:") ||
     rawHref.startsWith("#") &&
