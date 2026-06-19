@@ -49,7 +49,7 @@ $$
 
 对于 [电容](https://github.com/Cateds/CAD_Lecture_Notes/blob/main/Lecture10.md) 和 [电感](https://github.com/Cateds/CAD_Lecture_Notes/blob/main/Lecture11.md) 来说，他们的充放电过程就是能量的存储和释放过程，因此存储了能量。这个原理实现了 [RC电路](https://github.com/Cateds/CAD_Lecture_Notes/blob/main/Lecture12.md) 和 [RL电路](https://github.com/Cateds/CAD_Lecture_Notes/blob/main/Lecture13.md)。
 
-电感会在希望断路时导致电压尖峰，需要使用续流二极管解决这个问题。
+电感在电路断开时会产生电压尖峰，需要使用续流二极管解决这个问题。
 
 对于 [交流电路](https://github.com/Cateds/CAD_Lecture_Notes/blob/main/Lecture15.md) 和变化的信号，一个重要参数是均方根值 (Root Mean Square, RMS)，它是一个周期内信号的平方的平均值的平方根。对于正弦交流电来说，RMS 值是峰值的 $\frac{1}{\sqrt{2}}$。
 
@@ -57,7 +57,7 @@ $$
 
 RMS 与峰值的比例只与波形有关，和频率无关，和幅值无关。
 
-> 这个是 RMS 值是等效功率的证明：
+> 这是 RMS 值与等效功率关系的证明：
 >
 > ![prove](lec2.assets/image.png)
 
@@ -100,7 +100,7 @@ $$
 对于正弦波，这个参数的值为
 
 $$
-FF = \frac{\sqrt{\frac{1}{T}\int_0^T A^2\sin^2(\omega t) dt}}{\frac{1}{T}\int_0^T A\sin(\omega t) dt} = \frac{\sqrt{\frac{A^2}{2}}}{\frac{2A}{\pi}} = \frac{\pi}{2\sqrt{2}} \approx 1.11
+FF = \frac{\sqrt{\frac{1}{T}\int_0^T A^2\sin^2(\omega t) dt}}{\frac{1}{T}\int_0^T |A\sin(\omega t)| dt} = \frac{\sqrt{\frac{A^2}{2}}}{\frac{2A}{\pi}} = \frac{\pi}{2\sqrt{2}} \approx 1.11
 $$
 
 不同的波形的典型波形因数是
